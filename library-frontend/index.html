@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Quản Lý Thư Viện - Cloud AWS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">AWS Cloud Library</span>
+            </div>
+            <div class="nav-info">
+                <span class="badge">AWS Capstone Project</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Phần tiêu đề và nút mở Form -->
+        <section class="action-bar">
+            <div>
+                <h2>Quản lý kho sách</h2>
+                <p class="subtitle">Dữ liệu lưu tại AWS RDS MySQL, ảnh bìa lưu trên AWS S3</p>
+            </div>
+            <button class="btn btn-primary" id="btn-toggle-form">+ Thêm sách mới</button>
+        </section>
+
+        <!-- Form Thêm / Cập nhật sách (mặc định ẩn) -->
+        <section class="card form-section" id="book-form-section" style="display: none;">
+            <h3 id="form-title">Thêm cuốn sách mới</h3>
+            <form id="book-form">
+                <input type="hidden" id="book-id">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="title">Tên sách *</label>
+                        <input type="text" id="title" required placeholder="Nhập tên sách...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="author">Tác giả *</label>
+                        <input type="text" id="author" required placeholder="Tên tác giả...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="isbn">Mã ISBN *</label>
+                        <input type="text" id="isbn" required placeholder="Mã số tiêu chuẩn...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cover-file">Ảnh bìa (Tải lên AWS S3)</label>
+                        <input type="file" id="cover-file" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success" id="btn-submit">Lưu vào Hệ Thống</button>
+                    <button type="button" class="btn btn-secondary" id="btn-cancel">Hủy</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Thanh tìm kiếm sách -->
+        <section class="search-bar">
+            <input type="text" id="search-input" placeholder="🔍 Tìm kiếm sách theo tên, tác giả hoặc ISBN...">
+        </section>
+
+        <!-- Danh sách sách dạng Grid -->
+        <section>
+            <div class="books-grid" id="books-container">
+                <!-- Javascript sẽ tự render danh sách sách vào đây -->
+            </div>
+            <div class="loading-state" id="loading-spinner">Đang tải danh sách sách từ AWS...</div>
+            <div class="empty-state" id="empty-state" style="display: none;">Chưa có cuốn sách nào trong thư viện.</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Đồ án Cloud Computing - Giảng viên hướng dẫn: Thầy Huỳnh Xuân Phụng</p>
+        <p>Sinh viên thực hiện: Nguyễn Trần Anh Quốc</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

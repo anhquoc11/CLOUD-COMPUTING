@@ -19,6 +19,9 @@ public class Book {
     @Column(unique = true, length = 20)
     private String isbn;
 
+    @Column(name = "cover_image_url", length = 500)
+    private String coverImageUrl;
+
     private boolean isAvailable = true;
 
     public Long getId() {
@@ -61,5 +64,12 @@ public class Book {
         this.isAvailable = isAvailable;
     }
     
+    public String getCoverImageUrl() {
+        return coverImageUrl;
+    }
+
+    public void setCoverImageUrl(String coverImageUrl) {
+        this.coverImageUrl = coverImageUrl;
+    }
 
 }
