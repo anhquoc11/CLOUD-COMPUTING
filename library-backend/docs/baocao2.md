@@ -7,7 +7,8 @@ Kính gửi thầy Phụng, em xin báo cáo tiến độ Đồ án Cloud Comput
 
 **2. PHÂN CÔNG VÀ LIỆT KÊ CÔNG VIỆC CHI TIẾT**
 
-Sinh viên **Nguyễn Trần Anh Quốc** đã hoàn thành các công việc sau trong Tuần 2 (Tổng thời gian: 9.0 giờ):
+Sinh viên **Nguyễn Trần Anh Quốc** đã hoàn thành các công việc sau trong Tuần 2:
+- Thư mục chứa toàn bộ ảnh minh chứng Tuần 2: https://github.com/anhquoc11/CLOUD-COMPUTING/tree/main/library-backend/docs/images
 
 * **Công việc 1: Tích hợp AWS SDK for S3 và hoàn thiện lưu trữ ảnh bìa sách**
   - Cấu hình Bean `S3Client` sử dụng `DefaultCredentialsProvider` tận dụng quyền `LabInstanceProfile` của Lab.
@@ -32,7 +33,11 @@ Sinh viên **Nguyễn Trần Anh Quốc** đã hoàn thành các công việc sa
   - Khởi tạo S3 Bucket `capstone-library-frontend-nguyentrananhquoc-hcmute`, bật Static Website Hosting và gắn tag quản lý (`Project: LibraryManagement`, `Owner: NguyenTranAnhQuoc`).
   - Thiết lập Bucket Policy mở quyền đọc công khai cho website.
   - Link Website Frontend trên S3: http://capstone-library-frontend-nguyentrananhquoc-hcmute.s3-website-us-east-1.amazonaws.com
-  - Minh chứng hình ảnh Website hoạt động trên S3:
+  - Minh chứng hình ảnh giao diện danh sách sách (Card Grid):
+    https://github.com/anhquoc11/CLOUD-COMPUTING/blob/main/library-backend/docs/images/frontend-local-card-grid.png
+  - Minh chứng kiểm thử form thêm sách mới thành công:
+    https://github.com/anhquoc11/CLOUD-COMPUTING/blob/main/library-backend/docs/images/frontend-local-add-book.png
+  - Minh chứng hình ảnh Website hoạt động hoàn chỉnh trên S3:
     https://github.com/anhquoc11/CLOUD-COMPUTING/blob/main/library-backend/docs/images/s3-frontend-running.png
 
 * **Công việc 4: Đóng gói và Triển khai Backend lên AWS Elastic Beanstalk (Java 21)**
