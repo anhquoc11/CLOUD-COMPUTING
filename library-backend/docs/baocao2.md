@@ -4,6 +4,11 @@ Kính gửi thầy Phụng, em xin báo cáo tiến độ Đồ án Cloud Comput
 - **Tên đề tài:** Hệ thống quản lý thư viện trực tuyến (Full-stack trên AWS)
 - **Thành viên thực hiện:** Nguyễn Trần Anh Quốc (làm cá nhân)
 - **Link GitHub Public:** https://github.com/anhquoc11/CLOUD-COMPUTING
+- **Danh sách Commit Tuần 2:**
+  - Commit 1 (Mã nguồn & Triển khai Cloud): https://github.com/anhquoc11/CLOUD-COMPUTING/commit/2280d523abb2d32a53e956ea7e6ddfee266ec47c
+    *(Nội dung: Hoan thien full-stack app, deploy S3 frontend, Elastic Beanstalk va bo sung minh chung docs)*
+  - Commit 2 (Tài liệu Báo cáo & Minh chứng): https://github.com/anhquoc11/CLOUD-COMPUTING/commit/9d491ab3f0a3d34915f663e179d316f06a599e2c
+    *(Nội dung: Cap nhat day du 6 anh minh chung Tuan 2 vao baocao2.md)*
 
 **2. PHÂN CÔNG VÀ LIỆT KÊ CÔNG VIỆC CHI TIẾT**
 
@@ -64,3 +69,26 @@ Sinh viên **Nguyễn Trần Anh Quốc** đã hoàn thành các công việc sa
 - **Minh chứng qua link file đã cấu hình:** 
   - https://github.com/anhquoc11/CLOUD-COMPUTING/blob/main/library-backend/src/main/resources/application.properties
   - https://github.com/anhquoc11/CLOUD-COMPUTING/blob/main/library-backend/src/main/java/com/nguyentrananhquoc/library_backend/config/S3Config.java
+
+  ---
+
+**4. KẾ HOẠCH THỰC HIỆN TUẦN 3 (TÍCH HỢP, BẢO MẬT, GIÁM SÁT & TỰ ĐỘNG HÓA)**
+
+Trong Tuần 3, em dự kiến thực hiện các nội dung trọng tâm sau:
+
+* **Mục 1: Tăng cường Bảo mật với AWS Secrets Manager**
+  - Chuyển toàn bộ thông tin đăng nhập và mật khẩu Database AWS RDS từ `application.properties` sang lưu trữ an toàn trong **AWS Secrets Manager**.
+  - Cấu hình Backend Spring Boot tự động lấy credentials từ Secrets Manager khi khởi động thông qua IAM `LabRole`, không lưu thông tin nhạy cảm dưới dạng plain-text (đáp ứng trụ cột *Security* trong Well-Architected).
+
+* **Mục 2: Thiết lập Giám sát và Cảnh báo với AWS CloudWatch**
+  - Cấu hình **CloudWatch Alarms** giám sát mức sử dụng CPU của máy ảo Beanstalk/EC2 (ngưỡng CPUUtilization > 80%).
+  - Cấu hình giám sát số lượng kết nối Database Connections trên RDS MySQL.
+  - Tạo một CloudWatch Dashboard tổng hợp các metric giám sát quan trọng của hệ thống.
+
+* **Mục 3: Tự động hóa Hạ tầng bằng AWS CloudFormation (IaC)**
+  - Viết file template CloudFormation (`template.yaml`) định nghĩa và tự động hóa việc khởi tạo hạ tầng: S3 Bucket, VPC Security Group kết nối RDS.
+  - Kiểm thử triển khai Stack từ template trên CloudFormation Console.
+
+* **Mục 4: Kiểm thử Tích hợp & Cập nhật Báo cáo Tuần 3**
+  - Kiểm thử toàn diện luồng bảo mật (Backend lấy secret $\rightarrow$ kết nối RDS).
+  - Thu thập đầy đủ ảnh chụp màn hình minh chứng CloudWatch Alarms và CloudFormation Stack để cập nhật nhật ký công việc Tuần 3.
