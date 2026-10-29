@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudFormation Template - Ha tang He thong Quan ly Thu vien Truc tuyen (AWS Capstone)'
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: LibraryManagement
+    Description: Ten du an capstone
+
+  OwnerName:
+    Type: String
+    Default: NguyenTranAnhQuoc
+    Description: Sinh vien thuc hien
+
+Resources:
+  # 1. S3 Bucket luu tru anh bia sach
+  BookCoverImageBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'capstone-library-images-${AWS::AccountId}'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Owner
+          Value: !Ref OwnerName
+
+  # 2. S3 Bucket luu tru Website Frontend (Static Hosting)
+  FrontendWebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'capstone-library-frontend-${AWS::AccountId}'
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Owner
+          Value: !Ref OwnerName
+
+  # 3. Security Group cho Database RDS MySQL
+  DatabaseSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: 'Security Group cho AWS RDS MySQL - Port 3306'
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Owner
+          Value: !Ref OwnerName
+
+  # 4. CloudWatch Alarm giam sat CPU
+  HighCPUAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: 'IaC-Backend-High-CPU-Utilization'
+      AlarmDescription: 'Canh bao khi CPU vuot qua 80%'
+      MetricName: CPUUtilization
+      Namespace: AWS/EC2
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 80
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+
+Outputs:
+  ImageBucketName:
+    Description: 'Ten S3 Bucket luu anh'
+    Value: !Ref BookCoverImageBucket
+
+  WebsiteURL:
+    Description: 'Duong dan Website tren S3'
+    Value: !GetAtt FrontendWebsiteBucket.WebsiteURL

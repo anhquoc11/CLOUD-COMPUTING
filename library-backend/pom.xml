@@ -59,7 +59,11 @@
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>s3</artifactId>
 		</dependency>
-
+				<!-- AWS SDK for Secrets Manager -->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>secretsmanager</artifactId>
+		</dependency>
 		<!-- Swagger / OpenAPI Documentation UI -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

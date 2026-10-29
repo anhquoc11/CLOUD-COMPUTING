@@ -5,7 +5,6 @@ import com.nguyentrananhquoc.library_backend.service.BookService;
 import com.nguyentrananhquoc.library_backend.service.S3Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +20,13 @@ import java.util.Map;
 @CrossOrigin(origins = "*") // Hỗ trợ CORS cho Frontend trên S3
 @Tag(name = "Book Controller", description = "Các API quản lý sách và tích hợp lưu trữ ảnh trên AWS S3")
 public class BookController {
+    private final BookService bookService;
+    private final S3Service s3Service;
 
-    @Autowired
-    private BookService bookService;
-
-    @Autowired
-    private S3Service s3Service;
+    public BookController(BookService bookService, S3Service s3Service) {
+        this.bookService = bookService;
+        this.s3Service = s3Service;
+    }
 
     @Operation(summary = "Lấy danh sách tất cả các cuốn sách")
     @GetMapping
